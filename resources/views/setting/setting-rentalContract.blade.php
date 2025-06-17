@@ -74,54 +74,53 @@
                                         </div>
                                     </div>
                                     <div class="card-body pt-4">
-                                        <form>
+                                        <form id="form_submit">
+                                        @csrf
                                             <h4>คลิกเพื่อใส่ข้อมูล</h4>
                                             <div class="mb-3 d-flex gap-2 flex-wrap">
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary waves-effect">ชื่อหอพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary waves-effect">ที่อยู่หอพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary waves-effect">วันที่ปัจจุบัน</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary waves-effect">เดือน/ปีปัจจุบัน</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary waves-effect">ชื่อผู้เช่า</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">หมายเลขบัตรประชาชนผู้เช่า</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">เบอร์โทรผู้เช่า</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">หมายเลขห้องพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">หมายเลขชั้นของห้องพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">ระยะเวลาสัญญา</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">วันที่เริ่มต้นสัญญา</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">วันที่สิ้นสุดสัญญา</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">เงินประกันห้อง</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">ค่าเช่าห้อง</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">ค่าเช่าเฟอร์นิเจอร์</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">ค่าเช่าห้องไม่รวมค่าเฟอร์นิเจอร์</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">วันที่สิ้นสุดการชำระเงิน</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">เลขมิเตอร์ไฟฟ้าเข้าพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">เลขมิเตอร์น้ำเข้าพัก</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary  waves-effect">ลายเซนต์ผู้เช่า</button>
+                                                <button type="button" data-text="{ชื่อหอพัก}" class="btn btn-outline-secondary waves-effect addCondition">ชื่อหอพัก</button>
+                                                <button type="button" data-text="{ที่อยู่หอพัก}" class="btn btn-outline-secondary waves-effect addCondition">ที่อยู่หอพัก</button>
+                                                <button type="button" data-text="{วันที่ปัจจุบัน}" class="btn btn-outline-secondary waves-effect addCondition">วันที่ปัจจุบัน</button>
+                                                <button type="button" data-text="{เดือน/ปีปัจจุบัน}" class="btn btn-outline-secondary waves-effect addCondition">เดือน/ปีปัจจุบัน</button>
+                                                <button type="button" data-text="{ชื่อผู้เช่า}" class="btn btn-outline-secondary waves-effect addCondition">ชื่อผู้เช่า</button>
+                                                <button type="button" data-text="{หมายเลขบัตรประชาชนผู้เช่า}" class="btn btn-outline-secondary  waves-effect addCondition">หมายเลขบัตรประชาชนผู้เช่า</button>
+                                                <button type="button" data-text="{เบอร์โทรผู้เช่า}" class="btn btn-outline-secondary  waves-effect addCondition">เบอร์โทรผู้เช่า</button>
+                                                <button type="button" data-text="{หมายเลขห้องพัก}" class="btn btn-outline-secondary  waves-effect addCondition">หมายเลขห้องพัก</button>
+                                                <button type="button" data-text="{หมายเลขชั้นของห้องพัก}" class="btn btn-outline-secondary  waves-effect addCondition">หมายเลขชั้นของห้องพัก</button>
+                                                <button type="button" data-text="{ระยะเวลาสัญญา}" class="btn btn-outline-secondary  waves-effect addCondition">ระยะเวลาสัญญา</button>
+                                                <button type="button" data-text="{วันที่เริ่มต้นสัญญา}" class="btn btn-outline-secondary  waves-effect addCondition">วันที่เริ่มต้นสัญญา</button>
+                                                <button type="button" data-text="{วันที่สิ้นสุดสัญญา}" class="btn btn-outline-secondary  waves-effect addCondition">วันที่สิ้นสุดสัญญา</button>
+                                                <button type="button" data-text="{เงินประกันห้อง}" class="btn btn-outline-secondary  waves-effect addCondition">เงินประกันห้อง</button>
+                                                <button type="button" data-text="{ค่าเช่าห้อง}" class="btn btn-outline-secondary  waves-effect addCondition">ค่าเช่าห้อง</button>
+                                                <button type="button" data-text="{ค่าเช่าเฟอร์นิเจอร์}" class="btn btn-outline-secondary  waves-effect addCondition">ค่าเช่าเฟอร์นิเจอร์</button>
+                                                <button type="button" data-text="{ค่าเช่าห้องไม่รวมค่าเฟอร์นิเจอร์}" class="btn btn-outline-secondary  waves-effect addCondition">ค่าเช่าห้องไม่รวมค่าเฟอร์นิเจอร์</button>
+                                                <button type="button" data-text="{วันที่สิ้นสุดการชำระเงิน}" class="btn btn-outline-secondary  waves-effect addCondition">วันที่สิ้นสุดการชำระเงิน</button>
+                                                <button type="button" data-text="{เลขมิเตอร์ไฟฟ้าเข้าพัก}" class="btn btn-outline-secondary  waves-effect addCondition">เลขมิเตอร์ไฟฟ้าเข้าพัก</button>
+                                                <button type="button" data-text="{เลขมิเตอร์น้ำเข้าพัก}" class="btn btn-outline-secondary  waves-effect addCondition">เลขมิเตอร์น้ำเข้าพัก</button>
+                                                <button type="button" data-text="{ลายเซนต์ผู้เช่า}" class="btn btn-outline-secondary  waves-effect addCondition">ลายเซนต์ผู้เช่า</button>
                                             </div>
-                                            <div id="full-editor"></div>
-                                            <div class="addFloor text-center pt-4">
-                                                <button type="button" class="btn btn-main"><i
-                                                        class="ti-xs ti ti-device-floppy me-2"></i>บันทึกแก้ไข</button>
+                                            <div id="full-editor">{!!@$data->detail!!}</div>
+                                            <input type="hidden" name="detail" id="detail" value="{{@$data->detail}}">
+
+                                            {{-- <div class="row">
+                                                <div class="col-xs-12">
+                                                  <button class="btn btn-blue" type="button" name="button" ng-click="printSampleContract(htmlString)">
+                                                    <i class="fa fa-print"></i> พิมพ์ตัวอย่าง
+                                                  </button>
+                                                  <button class="btn btn-green pull-right" type="button" name="button" ng-click="saveContractHtml(htmlString)">
+                                                    <i class="fa fa-print"></i> บันทึกสัญญา
+                                                  </button>
+                                                  <button class="btn btn-default pull-right" style="margin-right:5px" type="button" name="button" ng-click="resetContract()">
+                                                    กลับสู่สัญญาเริ่มต้น
+                                                  </button>
+                                                </div>
+                                              </div> --}}
+
+                                            <div class="row mt-3">
+                                                <div class="col-md-10"><button type="button" class="btn btn-warning" onclick="print_show();"><i class="fa fa-print me-2"></i>พิมพ์ตัวอย่าง</button></div>
+                                                <div class="col-md-2 text-end">
+                                                    <button type="button" class="btn btn-main" onclick="check_add();"><i class="ti-xs ti ti-device-floppy me-2"></i>บันทึกแก้ไข</button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -154,6 +153,98 @@
     <script src="assets/vendor/libs/quill/katex.js"></script>
     <script src="assets/vendor/libs/quill/quill.js"></script>
     <script>
+        function replacePlaceholders(content, map) {
+            for (const key in map) {
+                const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                content = content.replace(regex, map[key]);
+            }
+            return content;
+        }
+        function print_show() {
+            const content = document.getElementById('detail').value;
+            const placeholders = {
+                "{ชื่อหอพัก}": "หอพัก Orange Technology",
+            };
+            const replacedContent = replacePlaceholders(content, placeholders);
+            const printWindow = window.open('', '', 'width=800,height=600');
+
+            printWindow.document.open();
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>พิมพ์ตัวอย่าง</title>
+                        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+                        <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+                        <style>
+                            @page {
+                                size: A4;
+                                margin: 20mm;
+                            }
+                            body {
+                                font-family: 'Sarabun', sans-serif;
+                                font-size: 14pt;
+                                padding: 20px;
+                                line-height: 1.6;
+                            }
+
+                            .ql-align-center {
+                                text-align: center;
+                            }
+                            .ql-align-right {
+                                text-align: right;
+                            }
+                            .ql-align-left {
+                                text-align: left;
+                            }
+
+                            /* เพิ่ม margin ให้ element ภายใน */
+                            p {
+                                margin: 0 0 10px;
+                            }
+                        </style>
+                    </head>
+                    <body onload="window.print(); window.close();">
+                        ${replacedContent}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+        function check_add() {
+            var formData = new FormData($("#form_submit")[0]);
+            event.preventDefault(); 
+            Swal.fire({
+                title: 'ยืนยันการดำเนินการ?',
+                text: 'คุณต้องการแก้ไขค่าห้องหรือไม่?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+                showDenyButton: false,
+                didOpen: () => {
+                    Swal.getConfirmButton().focus();
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'setting/rental-contract', 
+                        type: 'POST',
+                        data: formData,
+						processData: false,
+						contentType: false,
+						dataType: 'json',
+                        success: function(response) {
+                            location.href = "setting/rental-contract";
+                        },
+                        error: function(error) {
+                            Swal.fire('เกิดข้อผิดพลาด', '', 'error');
+                            console.error('เกิดข้อผิดพลาด:', error);
+                        }
+                    });
+                } else if (result.isDismissed) {
+                }
+            });
+        }
         const fullToolbar = [
             [{
                     font: []
@@ -217,6 +308,22 @@
                 toolbar: fullToolbar
             },
             theme: 'snow'
+        });
+        fullEditor.on('text-change', function () {
+            document.getElementById('detail').value = fullEditor.root.innerHTML;
+        });
+
+        function insertTextAtCursor(text) {
+            const cursorPosition = fullEditor.getSelection()?.index || 0;
+            fullEditor.insertText(cursorPosition, text);
+            fullEditor.setSelection(cursorPosition + text.length);
+        }
+
+        document.querySelectorAll('.addCondition').forEach(button => {
+            button.addEventListener('click', function () {
+                const textToInsert = this.getAttribute('data-text');
+                insertTextAtCursor(textToInsert);
+            });
         });
     </script>
 

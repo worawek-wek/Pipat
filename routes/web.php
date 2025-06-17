@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function() {
 
         Route::get('setting/manage-bill', 'manage_bill')->name('setting.manage_bill');    //////////////////////////
         Route::get('setting/rental-contract', 'rental_contract')->name('setting.rental_contract');    //////////////////////////
+        Route::post('setting/rental-contract', 'rental_contractSubmit');    //////////////////////////
         Route::get('setting/dorm-info', 'dorm_info')->name('setting.dorm_info');    //////////////////////////
         Route::post('setting/dorm-info/update_branch', 'update_branch')->name('setting.update_branch');    //////////////////////////
         Route::get('setting/room-rent', 'room_rent')->name('setting.room_rent');    //////////////////////////

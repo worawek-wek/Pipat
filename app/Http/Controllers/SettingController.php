@@ -19,6 +19,7 @@ use App\Models\Province;
 use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Company;
+use App\Models\RentalcontractModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -107,7 +108,21 @@ class SettingController extends Controller
     }
     public function rental_contract(Request $request)
     {
-        return view('setting/setting-rentalContract');
+        return view('setting/setting-rentalContract',[
+            'data' => RentalcontractModel::find(1),
+        ]);
+    }
+    public function rental_contractSubmit(Request $request)
+    {
+        try{
+            $data = RentalcontractModel::find(1);
+            $data->detail  =  $request->detail;
+            $data->save();
+            DB::commit();
+            return 1;
+        } catch (QueryException $err) {
+            DB::rollBack();
+        }
     }
     public function dorm_info()
     {
