@@ -153,6 +153,42 @@
     <script src="assets/vendor/libs/quill/katex.js"></script>
     <script src="assets/vendor/libs/quill/quill.js"></script>
     <script>
+        function generatePlaceholdersFromButtons() {
+            const placeholders = {};
+            document.querySelectorAll('.addCondition').forEach(button => {
+                const key = button.getAttribute('data-text');
+                placeholders[key] = getPlaceholderValue(key);
+            });
+            return placeholders;
+        }
+        function getPlaceholderValue(key) {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+
+            switch (key) {
+                case '{ชื่อหอพัก}': return 'หอพัก  Orange';
+                case '{ที่อยู่หอพัก}': return '32/1 ถ. จรัญสนิทวงศ์ แขวงบางอ้อ บางพลัด กรุงเทพมหานคร 10700';
+                case '{วันที่ปัจจุบัน}': return now.toLocaleDateString('th-TH', options);
+                case '{เดือน/ปีปัจจุบัน}': return now.toLocaleDateString('th-TH', { year: 'numeric', month: 'long' });
+                case '{ชื่อผู้เช่า}': return 'นายพิพัฒน์';
+                case '{หมายเลขบัตรประชาชนผู้เช่า}': return '0000000000';
+                case '{เบอร์โทรผู้เช่า}': return '02-424-555-9';
+                case '{หมายเลขห้องพัก}': return 'ชั้น 3';
+                case '{หมายเลขชั้นของห้องพัก}': return '3';
+                case '{ระยะเวลาสัญญา}': return '12 เดือน';
+                case '{วันที่เริ่มต้นสัญญา}': return '1 มกราคม 2568';
+                case '{วันที่สิ้นสุดสัญญา}': return '31 ธันวาคม 2568';
+                case '{เงินประกันห้อง}': return '5,000 บาท';
+                case '{ค่าเช่าห้อง}': return '7,500 บาท';
+                case '{ค่าเช่าเฟอร์นิเจอร์}': return '1,000 บาท';
+                case '{ค่าเช่าห้องไม่รวมค่าเฟอร์นิเจอร์}': return '6,500 บาท';
+                case '{วันที่สิ้นสุดการชำระเงิน}': return '5 มกราคม 2568';
+                case '{เลขมิเตอร์ไฟฟ้าเข้าพัก}': return '0000';
+                case '{เลขมิเตอร์น้ำเข้าพัก}': return '0000';
+                case '{ลายเซนต์ผู้เช่า}': return '(พิพัฒน์)';
+                default: return key; 
+            }
+        }
         function replacePlaceholders(content, map) {
             for (const key in map) {
                 const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
@@ -162,9 +198,7 @@
         }
         function print_show() {
             const content = document.getElementById('detail').value;
-            const placeholders = {
-                "{ชื่อหอพัก}": "หอพัก Orange Technology",
-            };
+            const placeholders = generatePlaceholdersFromButtons();
             const replacedContent = replacePlaceholders(content, placeholders);
             const printWindow = window.open('', '', 'width=800,height=600');
 
