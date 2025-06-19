@@ -112,7 +112,6 @@ class SettingController extends Controller
     public function manage_billSubmit(Request $request)
     {
         try{
-            DB::beginTransaction();
             $data = Setting_bill::find(1);
             if($data){
                 $data->type  =  $request->type;
@@ -135,7 +134,7 @@ class SettingController extends Controller
             }
           
         } catch (QueryException $err) {
-            DB::rollBack();
+            // DB::rollBack();
         }
     }
     

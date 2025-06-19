@@ -116,6 +116,16 @@
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <div class="row">
+                                                                @php 
+                                                                $image1 = "https://www.leceipt.com/wp-content/uploads/2021/12/%E0%B9%83%E0%B8%9A%E0%B8%A7%E0%B8%B2%E0%B8%87%E0%B8%9A%E0%B8%B4%E0%B8%A5-13.png";
+                                                                $image2 = "https://images.pexels.com/photos/27659008/pexels-photo-27659008/free-photo-of-a-black-and-white-photo-of-a-mosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+                                                                $image_show = $image1;
+                                                                if(@$data->type_doc == 0){
+                                                                    $image_show = $image1;
+                                                                }else{
+                                                                    $image_show = $image2;
+                                                                }
+                                                                @endphp
                                                                 <div class="col-md mb-md-0 mb-5">
                                                                     <div
                                                                         class="form-check custom-option custom-option-icon checked">
@@ -124,18 +134,11 @@
                                                                             for="customRadioIcon1">
                                                                             <span class="custom-option-body">
                                                                                 <div class="ratio ratio-1x1 mb-3">
-                                                                                    <img src="https://images.pexels.com/photos/27659008/pexels-photo-27659008/free-photo-of-a-black-and-white-photo-of-a-mosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                                                        class="object-fit-contain"
-                                                                                        alt="...">
+                                                                                    <img src="{{@$image1}}" class="object-fit-contain" alt="...">
                                                                                 </div>
-                                                                                <span
-                                                                                    class="custom-option-title">ต้นฉบับ-สำเนาอยู่ใน
-                                                                                    1 แผ่น</span>
+                                                                                <span class="custom-option-title">ต้นฉบับ-สำเนาอยู่ใน 1 แผ่น</span>
                                                                             </span>
-                                                                            <input name="customOptionRadioIcon"
-                                                                                class="form-check-input" type="radio"
-                                                                                value="" id="customRadioIcon1"
-                                                                                checked="">
+                                                                            <input class="form-check-input" data-image="{{@$image1}}" type="radio" value="0" id="customRadioIcon1" name="type_doc" @if(@$data->type_doc == 0) checked @endif>
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -147,16 +150,11 @@
                                                                             for="customRadioIcon2">
                                                                             <span class="custom-option-body">
                                                                                 <div class="ratio ratio-1x1 mb-3">
-                                                                                    <img src="https://images.pexels.com/photos/27659008/pexels-photo-27659008/free-photo-of-a-black-and-white-photo-of-a-mosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                                                        class="object-fit-contain"
-                                                                                        alt="...">
+                                                                                    <img src="{{@$image2}}" class="object-fit-contain" alt="...">
                                                                                 </div>
-                                                                                <span class="custom-option-title">
-                                                                                    ต้นฉบับ-สำเนา 1 แผ่น </span>
+                                                                                <span class="custom-option-title"> ต้นฉบับ-สำเนา 1 แผ่น </span>
                                                                             </span>
-                                                                            <input name="customOptionRadioIcon"
-                                                                                class="form-check-input" type="radio"
-                                                                                value="" id="customRadioIcon2">
+                                                                            <input class="form-check-input" type="radio" data-image="{{@$image2}}" value="1" id="customRadioIcon2" name="type_doc" @if(@$data->type_doc == 1) checked @endif>
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -164,8 +162,7 @@
                                                         </div>
                                                         <div class="col-sm-6 text-center">
                                                             <div class="ratio ratio-1x1 bg-white rounded">
-                                                                <img src="https://images.pexels.com/photos/27659008/pexels-photo-27659008/free-photo-of-a-black-and-white-photo-of-a-mosque.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                                    class="object-fit-contain border rounded" alt="...">
+                                                                <img id="previewImage" src="{{@$image_show}}" class="object-fit-contain border rounded" alt="...">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,7 +173,7 @@
                                             </div> --}}
                                             <hr class="border-light my-4">
                                             <h4 class="text-center">ตั้งค่าข้อความท้าย<span class="text-main">ใบแจ้งหนี้</span></h4>
-                                            <div id="full-editor"></div>
+                                            <div id="full-editor">{!!@$data->detail_footer!!}</div>
                                             <input type="hidden" name="detail_footer" id="detail_footer" value="{{@$data->detail_footer}}">
                                             
                                             {{-- <div class="text-center pt-4">
@@ -184,7 +181,7 @@
                                             </div> --}}
                                             <hr class="border-light my-4">
                                             <h4 class="text-center">ตั้งค่ารูปแบบเอกสาร<span class="text-main">ใบเสร็จจองห้องพัก</span></h4>
-                                            <div id="full-editor1"></div>
+                                            <div id="full-editor1">{!!@$data->detail_doc!!}</div>
                                             <input type="hidden" name="detail_doc" id="detail_doc" value="{{@$data->detail_doc}}">
                                             <div class="text-center pt-4">
                                                 <button type="button" onclick="check_add();" class="btn btn-main">บันทึก</button>
@@ -220,12 +217,25 @@
     <script src="assets/vendor/libs/quill/katex.js"></script>
     <script src="assets/vendor/libs/quill/quill.js"></script>
     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const radios = document.querySelectorAll('input[name="type_doc"]');
+        const preview = document.getElementById('previewImage');
+        radios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                const imageUrl = this.dataset.image;
+                preview.src = imageUrl;
+            });
+            if (radio.checked) {
+                preview.src = radio.dataset.image;
+            }
+        });
+    });
     function check_add() {
         var formData = new FormData($("#form_submit")[0]);
         event.preventDefault(); 
         Swal.fire({
             title: 'ยืนยันการดำเนินการ?',
-            text: 'คุณต้องการแก้ไขค่าห้องหรือไม่?',
+            text: 'คุณต้องการแก้ไขรายการตั้งค่าบิลใช่หรือไม่?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'ตกลง',
