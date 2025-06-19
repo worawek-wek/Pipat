@@ -100,6 +100,8 @@ Route::middleware('auth')->group(function() {
         Route::post('setting/fine/update/{id}', 'fine_update')->name('setting.fine-update');    //////////////////////////
 
         Route::get('setting/manage-bill', 'manage_bill')->name('setting.manage_bill');    //////////////////////////
+        Route::post('setting/manage-bill', 'manage_billSubmit');    //////////////////////////
+
         Route::get('setting/rental-contract', 'rental_contract')->name('setting.rental_contract');    //////////////////////////
         Route::post('setting/rental-contract', 'rental_contractSubmit');    //////////////////////////
         Route::get('setting/dorm-info', 'dorm_info')->name('setting.dorm_info');    //////////////////////////

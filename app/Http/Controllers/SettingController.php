@@ -20,6 +20,7 @@ use App\Models\District;
 use App\Models\Subdistrict;
 use App\Models\Company;
 use App\Models\RentalcontractModel;
+use App\Models\Setting_bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -104,8 +105,40 @@ class SettingController extends Controller
     }
     public function manage_bill(Request $request)
     {
-        return view('setting/setting-manageBill');
+        return view('setting/setting-manageBill',[
+            'data' => Setting_bill::find(1),
+        ]);
     }
+    public function manage_billSubmit(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $data = Setting_bill::find(1);
+            if($data){
+                $data->type  =  $request->type;
+                $data->company_name  =  $request->company_name;
+                $data->address  =  $request->address;
+                $data->tax_no  =  $request->tax_no;
+                $data->phone  =  $request->phone;
+                $data->email  =  $request->email;
+                $data->type_doc  =  $request->type_doc;
+                $data->detail_footer  =  $request->detail_footer;
+                $data->detail_doc  =  $request->detail_doc;
+                if($data->save()){
+                    DB::commit();
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }else{
+                return 0;
+            }
+          
+        } catch (QueryException $err) {
+            DB::rollBack();
+        }
+    }
+    
     public function rental_contract(Request $request)
     {
         return view('setting/setting-rentalContract',[

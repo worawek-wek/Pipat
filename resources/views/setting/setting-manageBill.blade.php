@@ -74,42 +74,38 @@
                                         </div>
                                     </div>
                                     <div class="card-body pt-4">
-                                        <form>
+                                        <form id="form_submit">
+                                        @csrf
                                             <div class="row g-3">
                                                 <div class="col-sm-12">
-                                                    <label for="" class="form-label">ประเภทธุรกิจ<span
-                                                            class="text-danger">*</span></label>
-                                                    <select class="form-select" required>
-                                                        <option>บุคคลธรรมดา</option>
-                                                        <option></option>
+                                                    <label for="" class="form-label">ประเภทธุรกิจ<span class="text-danger">*</span></label>
+                                                    <select id="type" name="type" class="form-select" required>
+                                                        <option value="0" @if(@$data->type == 0) selected @endif>บุคคลธรรมดา</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <label for="" class="form-label">ชื่อบริษัท/ชื่อเต็ม<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="" placeholder=""
-                                                        value="กิตตินคร" required />
+                                                    <label for="" class="form-label">ชื่อบริษัท/ชื่อเต็ม<spanclass="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="" value="{{@$data->company_name}}" required />
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <label for="" class="form-label">ที่อยู่</label>
-                                                    <textarea rows="3"
-                                                        class="form-control">333,333/4 ม.6 ซ.เจริญใจ ถ.เทพารักษ์ ตำบล เทพารักษ์ ต.เทพารักษ์ อ.เมืองสมุทรปราการ จ.สมุทรปราการ </textarea>
+                                                    <textarea rows="3" id="address" name="address" class="form-control">{{@$data->address}}</textarea>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <label for="" class="form-label">เลขประจำตัวผู้เสียภาษี</label>
-                                                    <input type="text" class="form-control" id="" placeholder="" />
+                                                    <input type="text" class="form-control" id="tax_no" name="tax_no" value="{{@$data->tax_no}}" placeholder="" />
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="" class="form-label">เบอร์โทร</label>
-                                                    <input type="text" class="form-control" id="" placeholder="" />
+                                                    <input type="text" class="form-control" id="phone" name="phone" value="{{@$data->phone}}" placeholder="" />
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="" class="form-label">อีเมล</label>
-                                                    <input type="email" class="form-control" id="" placeholder="" />
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{@$data->email}}" placeholder="" />
                                                 </div>
-                                                <div class="col-sm-12 text-center">
+                                                {{-- <div class="col-sm-12 text-center">
                                                     <button type="submit" class="btn btn-main">บันทึก</button>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <hr class="border-light my-4">
                                             <h4 class="text-center">ตั้งค่ารูปแบบเอกสาร</h4>
@@ -175,22 +171,23 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="text-center pt-4">
+                                            {{-- <div class="text-center pt-4">
                                                 <button type="submit" class="btn btn-main">บันทึก</button>
-                                            </div>
+                                            </div> --}}
                                             <hr class="border-light my-4">
-                                            <h4 class="text-center">ตั้งค่าข้อความท้าย<span
-                                                    class="text-main">ใบแจ้งหนี้</span></h4>
+                                            <h4 class="text-center">ตั้งค่าข้อความท้าย<span class="text-main">ใบแจ้งหนี้</span></h4>
                                             <div id="full-editor"></div>
-                                            <div class="text-center pt-4">
+                                            <input type="hidden" name="detail_footer" id="detail_footer" value="{{@$data->detail_footer}}">
+                                            
+                                            {{-- <div class="text-center pt-4">
                                                 <button type="submit" class="btn btn-main">บันทึก</button>
-                                            </div>
+                                            </div> --}}
                                             <hr class="border-light my-4">
-                                            <h4 class="text-center">ตั้งค่ารูปแบบเอกสาร<span
-                                                    class="text-main">ใบเสร็จจองห้องพัก</span></h4>
-                                            <div id="full-editor"></div>
+                                            <h4 class="text-center">ตั้งค่ารูปแบบเอกสาร<span class="text-main">ใบเสร็จจองห้องพัก</span></h4>
+                                            <div id="full-editor1"></div>
+                                            <input type="hidden" name="detail_doc" id="detail_doc" value="{{@$data->detail_doc}}">
                                             <div class="text-center pt-4">
-                                                <button type="submit" class="btn btn-main">บันทึก</button>
+                                                <button type="button" onclick="check_add();" class="btn btn-main">บันทึก</button>
                                             </div>
                                         </form>
                                     </div>
@@ -223,6 +220,41 @@
     <script src="assets/vendor/libs/quill/katex.js"></script>
     <script src="assets/vendor/libs/quill/quill.js"></script>
     <script>
+    function check_add() {
+        var formData = new FormData($("#form_submit")[0]);
+        event.preventDefault(); 
+        Swal.fire({
+            title: 'ยืนยันการดำเนินการ?',
+            text: 'คุณต้องการแก้ไขค่าห้องหรือไม่?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            showDenyButton: false,
+            didOpen: () => {
+                Swal.getConfirmButton().focus();
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'setting/manage-bill', 
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        location.href = "setting/manage-bill";
+                    },
+                    error: function(error) {
+                        Swal.fire('เกิดข้อผิดพลาด', '', 'error');
+                        console.error('เกิดข้อผิดพลาด:', error);
+                    }
+                });
+            } else if (result.isDismissed) {
+            }
+        });
+    }
     const fullToolbar = [
         [{
                 font: []
@@ -286,6 +318,22 @@
             toolbar: fullToolbar
         },
         theme: 'snow'
+    });
+    fullEditor.on('text-change', function () {
+        document.getElementById('detail_footer').value = fullEditor.root.innerHTML;
+    });
+
+    const fullEditor1 = new Quill('#full-editor1', {
+        bounds: '#full-editor1',
+        placeholder: 'Type Something...',
+        modules: {
+            formula: true,
+            toolbar: fullToolbar
+        },
+        theme: 'snow'
+    });
+    fullEditor1.on('text-change', function () {
+        document.getElementById('detail_doc').value = fullEditor.root.innerHTML;
     });
     </script>
 
